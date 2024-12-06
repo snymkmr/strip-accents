@@ -1,0 +1,23 @@
+{
+  "name": "strip-accents",
+  "version": "1.0.0",
+  "description": "Removes the accents/diacritics from a string, converting them to their corresponding non-accented ASCII characters.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snymkmr/strip-accents.git"
+  },
+  "keywords": [
+    "accent",
+    "remove-accent",
+    "strip-accent"
+  ],
+  "author": "Sanyam Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "unidecode": "^1.1.0"
+  }
+}
