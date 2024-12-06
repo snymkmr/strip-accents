@@ -14,7 +14,7 @@ $ npm install strip-accents
 ## Usage
 
 ```js
-import stripAccents from 'strip-accents';
+const stripAccents = require ('strip-accents');
 
 stripAccents("Sañyam") 
 //=> 'Sanyam'
