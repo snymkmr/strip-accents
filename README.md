@@ -3,7 +3,7 @@ Removes the accents/diacritics from a string, converting them to their correspon
 
 # strip-accents
 
-> Strip [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code) from a string
+> Strip [Unicode/UTF-8-character](https://www.utf8-chartable.de/) from a string
 
 ## Install
 
