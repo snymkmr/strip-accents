@@ -1,23 +1,23 @@
-let unidecode = require('unidecode')
+const unidecode = require('unidecode');
+
+const controlCharStart = `\u{0000}`;    // <control> UTF-8
+const controlCharEnd = `\u{001F}`;
+
+const latin1SupplementStart = `\u{0080}`;    // Latin-1 supplement
+const latin1SupplementEnd = `\u{00BF}`;
+
+const mathOperatorsStart = `\u{2200}`;    // Mathematical operators
+const mathOperatorsEnd = `\u{259F}`;
+
+const stripPattern = new RegExp(`[${`\u{0152}`}${`\u{0153}`}${`\u{00D0}`}${`\u{00E6}`}${`\u{0131}`}${`\u{00C6}`}${`\u{00F8}`}${`\u{00D7}`}${`\u{00D8}`}${`\u{25A0}`}${`\u{0192}`}${`\u{00DF}`}${`\u{00FE}`}${`\u{00DE}`}${`\u{2017}`}${`\u{00F0}`}${`\u{00F7}`}${controlCharStart}-${controlCharEnd}${latin1SupplementStart}-${latin1SupplementEnd}${mathOperatorsStart}-${mathOperatorsEnd}]`, `g`);
 
 const stripAccents = (string) => {
-
-    start0 = `\u{0000}`;    // <control> UTF-8
-    end0 = `\u{001F}`;
-
-    start1 = `\u{0080}`;    // Latin-1 supliment
-    end1 = `\u{00BF}`;
-
-    start2 = `\u{2200}`     // Mathematical operators
-    end2 = `\u{259F}`;
-
-    stripPattern = new RegExp(`[${`\u{0152}`}${`\u{0153}`}${`\u{00D0}`}${`\u{00E6}`}${`\u{0131}`}${`\u{00C6}`}${`\u{00F8}`}${`\u{00D7}`}${`\u{00D8}`}${`\u{25A0}`}${`\u{0192}`}${`\u{00DF}`}${`\u{00FE}`}${`\u{00DE}`}${`\u{2017}`}${`\u{00F0}`}${`\u{00F7}`}${start0}-${end0}${start1}-${end1}${start2}-${end2}]`, `g`);
-    string = "" + string;
+    string = String(string);
     string = string.replace(stripPattern, ` `);
 
-    // stripping outlier characters
+    // Stripping outlier characters
     return unidecode(string);
-}
+};
 
-module.exports = stripAccents
+module.exports = stripAccents;
 // console.log(stripAccents("Sañyam"));
