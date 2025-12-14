@@ -7,6 +7,14 @@ assert.strictEqual(stripAccents('æther'), 'aether');
 assert.strictEqual(stripAccents('Straße'), 'Strasse');
 assert.strictEqual(stripAccents('Crème Brûlée'), 'Creme Brulee');
 
+// Combining-mark sequences should normalize before stripping
+assert.strictEqual(stripAccents('Cafe\u0301'), 'Cafe');
+assert.strictEqual(stripAccents('A\u030Angstrom'), 'Angstrom');
+
+// Non-string inputs are coerced via String()
+assert.strictEqual(stripAccents(42), '42');
+assert.strictEqual(stripAccents(null), 'null');
+
 // Legacy coverage tests
 // Control characters (0x00-0x1F) - Should be preserved or stripped depending on normalize? 
 // Current implementation preserves them as they are not diacritics.
