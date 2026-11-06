@@ -30,4 +30,32 @@ assert.strictEqual(stripAccents('®'), '®');
 assert.strictEqual(stripAccents('∀'), '∀');
 assert.strictEqual(stripAccents('∑'), '∑');
 
+// Letters without a Unicode decomposition are mapped to ASCII
+assert.strictEqual(stripAccents('Søren Ørsted'), 'Soren Orsted');
+assert.strictEqual(stripAccents('Łódź, Wałęsa'), 'Lodz, Walesa');
+assert.strictEqual(stripAccents('Đorđe, Đà Nẵng'), 'Dorde, Da Nang');
+assert.strictEqual(stripAccents('Kırıkkale'), 'Kirikkale');
+assert.strictEqual(stripAccents('Ħamrun ħ'), 'Hamrun h');
+assert.strictEqual(stripAccents('Ŧŧ Ŋŋ Ŀŀ'), 'Tt Nn Ll');
+
+// Accents from the extended combining-mark blocks are stripped too
+assert.strictEqual(stripAccents('e᷄'), 'e');      // Supplement
+assert.strictEqual(stripAccents('a᪰'), 'a');      // Extended
+assert.strictEqual(stripAccents('v⃗'), 'v');      // For Symbols
+assert.strictEqual(stripAccents('t︠s︡'), 'ts'); // Half Marks
+assert.strictEqual(stripAccents('Tiếng Việt'), 'Tieng Viet');
+
+// Text in other scripts comes back unchanged (same code points, not decomposed)
+assert.strictEqual(stripAccents('한국어'), '한국어');
+assert.strictEqual(stripAccents('がぎぐ'), 'がぎぐ');
+assert.strictEqual(stripAccents('हिन्दी'), 'हिन्दी');
+assert.strictEqual(stripAccents('Ελλάδα'), 'Ελλαδα');  // Greek accents are stripped
+
+// Emoji survive, including keycaps that use an enclosing combining mark (U+20E3)
+assert.strictEqual(stripAccents('café ☕️👍🏽'), 'cafe ☕️👍🏽');
+assert.strictEqual(stripAccents('1️⃣ #️⃣'), '1️⃣ #️⃣');
+
+assert.strictEqual(stripAccents(''), '');
+assert.strictEqual(stripAccents(undefined), 'undefined');
+
 console.log('All tests passed.');
