@@ -1,8 +1,11 @@
 {
   "name": "strip-accents",
-  "version": "1.1.0",
-  "description": "Removes the accents/diacritics from a string, converting them to their corresponding non-accented ASCII characters.",
+  "version": "2.0.0",
+  "description": "Removes accents and diacritics from Latin letters, converting them to plain ASCII. Other scripts are left unchanged.",
   "main": "index.js",
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
     "test": "node test/test.js"
   },
