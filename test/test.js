@@ -49,7 +49,13 @@ assert.strictEqual(stripAccents('Tiếng Việt'), 'Tieng Viet');
 assert.strictEqual(stripAccents('한국어'), '한국어');
 assert.strictEqual(stripAccents('がぎぐ'), 'がぎぐ');
 assert.strictEqual(stripAccents('हिन्दी'), 'हिन्दी');
-assert.strictEqual(stripAccents('Ελλάδα'), 'Ελλαδα');  // Greek accents are stripped
+
+// Only Latin letters are stripped: Greek and Cyrillic keep their accents
+assert.strictEqual(stripAccents('Ελλάδα'), 'Ελλάδα');
+assert.strictEqual(stripAccents('Йошкар-Ола, ёлка'), 'Йошкар-Ола, ёлка');
+assert.strictEqual(stripAccents('Café Москва Αθήνα'), 'Cafe Москва Αθήνα');
+assert.strictEqual(stripAccents('́é'), 'e');  // stray mark at the start is removed
+assert.strictEqual(stripAccents('1́ -́'), '1 -'); // marks on digits/punctuation are removed
 
 // Emoji survive, including keycaps that use an enclosing combining mark (U+20E3)
 assert.strictEqual(stripAccents('café ☕️👍🏽'), 'cafe ☕️👍🏽');
